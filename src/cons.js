@@ -10,8 +10,8 @@ const SCtest = "0xEC836b3F0fa7BF1579ab32C57A4e7dee971ccDcE";// direccion del con
 
 
 
-const SC = "0x7C989de477ae67D542ced9296329c9717Bb42611";// direccion del contrato V1
-const SC2 = "0x7C989de477ae67D542ced9296329c9717Bb42611";// direccion del contrato V2
+const SC = "0x5DD2128509A7e5BC326e2C6705DBED4B4470d6B4";// direccion del contrato V1
+const SC2 = "0x5DD2128509A7e5BC326e2C6705DBED4B4470d6B4";// direccion del contrato V2
 
 const TOKEN = "0x55d398326f99059fF775485246999027B3197955";
 
