@@ -1,4 +1,4 @@
-pragma solidity >=0.7.0;
+pragma solidity >=0.8.0;
 // SPDX-License-Identifier: Apache 2.0
 
 interface TRC20_Interface {
@@ -191,7 +191,7 @@ contract BinarySystem is Context, Admin{
   uint256 public activerFee = 1;
   // 0 desactivada total | 1 activa 5% fee retiro | 2 activa fee retiro y precio de registro
 
-  address[] public wallet = [0x4490566647735e8cBCe0ce96efc8FB91c164859b, 0xe201933ca7b5af514a1b0119bbc1072a066c06df, 0xe2283cB00B9c32727941728bEDe372005c6ca311, 0x763EB0A2A2925c45927DbF6432f191fc66fbCfa8, 0xDEFf65e4BCF19A52B0DB33E57B7Ce262Fd5dB53F, 0x8A6AC002b64bBba26e746D97d4050e71240B30B0, 0x0bddC342f66F46968A15bD1c16DBEFA5B63a1588];
+  address[] public wallet = [0x4490566647735e8cBCe0ce96efc8FB91c164859b, 0xe201933cA7B5aF514A1b0119bBC1072a066C06df, 0xe2283cB00B9c32727941728bEDe372005c6ca311, 0x763EB0A2A2925c45927DbF6432f191fc66fbCfa8, 0xDEFf65e4BCF19A52B0DB33E57B7Ce262Fd5dB53F, 0x8A6AC002b64bBba26e746D97d4050e71240B30B0, 0x0bddC342f66F46968A15bD1c16DBEFA5B63a1588];
   bool[] public transfer = [true, true, true, true, true, true, true];
   uint256[] public valor = [6, 5, 2, 2, 2, 2, 47];
 
