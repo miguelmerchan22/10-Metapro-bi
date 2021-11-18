@@ -7,9 +7,9 @@
             "type": "constructor"
         }
     ],
-    "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/STC/Documents/GitHub/10-Metapro-bi/contracts/BinariSystem.sol\":\"Context\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/STC/Documents/GitHub/10-Metapro-bi/contracts/BinariSystem.sol\":{\"keccak256\":\"0xe39e67f93ff550cd3fcd0fdef41861a324b3c3a4ac62bc694d0096e2951cd3df\",\"license\":\"Apache 2.0\",\"urls\":[\"bzz-raw://7be1f7dae15e0258c03baf123366d93ff2f27904da4bb21a3a9218e6bc50c6bf\",\"dweb:/ipfs/QmTtrnJw2TidF5RjCu1kXxC5QTsX16eBwypCTtRifzkfXK\"]}},\"version\":1}",
-    "bytecode": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212207b515fd148cb1a59d5f3b1c5cd20d251de86d45b7710f56796b8d56929adf77a64736f6c634300080a0033",
-    "deployedBytecode": "6080604052600080fdfea26469706673582212207b515fd148cb1a59d5f3b1c5cd20d251de86d45b7710f56796b8d56929adf77a64736f6c634300080a0033",
+    "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/STC/Documents/GitHub/10-Metapro-bi/contracts/BinariSystem.sol\":\"Context\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/STC/Documents/GitHub/10-Metapro-bi/contracts/BinariSystem.sol\":{\"keccak256\":\"0xa4c9c226cd5600c588e7e85f310c93c9868d54b65391798561ab27f7b73a4270\",\"license\":\"Apache 2.0\",\"urls\":[\"bzz-raw://ee2af38af157d0d80a613b495497dd7a1d5f56aaa0377e2cd91c5119f832fc4e\",\"dweb:/ipfs/QmPoVCuHE7J9ZcVK3FJo4Ckb9KSDGtfJFa622upMUNQ7VC\"]}},\"version\":1}",
+    "bytecode": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212204a811e5dfee69a10485378b155c4ad1846fefbb8d9742ff0f5f3ed77997c7d6d64736f6c634300080a0033",
+    "deployedBytecode": "6080604052600080fdfea26469706673582212204a811e5dfee69a10485378b155c4ad1846fefbb8d9742ff0f5f3ed77997c7d6d64736f6c634300080a0033",
     "sourceMap": "1174:255:0:-:0;;;1198:18;;;;;;;;;;1174:255;;;;;;",
     "deployedSourceMap": "1174:255:0:-:0;;;;;",
     "sourcePath": "c:/Users/STC/Documents/GitHub/10-Metapro-bi/contracts/BinariSystem.sol",
@@ -48,7 +48,7 @@
                 "literals": [
                     "solidity",
                     ">=",
-                    "0.7",
+                    "0.8",
                     ".0"
                 ],
                 "nodeType": "PragmaDirective",
