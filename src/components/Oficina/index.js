@@ -317,7 +317,7 @@ export default class Oficina extends Component {
       rango = "Sapphire"
       if(!rangoArray[0]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(0).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(1).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
@@ -329,7 +329,7 @@ export default class Oficina extends Component {
       rango = "Ruby"
       if(!rangoArray[1]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(1).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(2).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
@@ -341,7 +341,7 @@ export default class Oficina extends Component {
       rango = "Emerauld"
       if(!rangoArray[2]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(2).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(3).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
@@ -353,7 +353,7 @@ export default class Oficina extends Component {
       rango = "Diamond"
       if(!rangoArray[2]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(3).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(4).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
@@ -365,7 +365,7 @@ export default class Oficina extends Component {
       rango = "Blue Diamond"
       if(!rangoArray[2]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(4).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(5).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
@@ -377,7 +377,7 @@ export default class Oficina extends Component {
       rango = "Black Diamond"
       if(!rangoArray[2]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(5).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(6).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
@@ -389,7 +389,7 @@ export default class Oficina extends Component {
       rango = "Crown Diamond"
       if(!rangoArray[2]){
         rangoEstilo = "btn-success";
-        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(6).call({from:this.state.currentAccount});
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(7).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
         gananciasRango = `Claim ${cantidad} USDT`;
         funcionRango = () => {
