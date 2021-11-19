@@ -301,6 +301,18 @@ export default class Oficina extends Component {
     if (rango === 0) {
       rango = "N/A"
     }
+    if (rango >= 1500 && rango < 5000) {
+      rango = "Master"
+      if(!rangoArray[0]){
+        rangoEstilo = "btn-success";
+        cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(0).call({from:this.state.currentAccount});
+        cantidad = cantidad / 10 ** 18;
+        gananciasRango = `Claim ${cantidad} USDT`;
+        funcionRango = () => {
+          return this.claim();
+        } ;
+      }
+    }
     if (rango >= 5000 && rango < 20000) {
       rango = "Sapphire"
       if(!rangoArray[0]){
