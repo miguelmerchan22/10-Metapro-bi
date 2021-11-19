@@ -157,15 +157,15 @@ contract BinarySystem is Context, Admin{
   uint256[] public plans = [0, 50*10**18, 100*10**18, 250*10**18, 500*10**18, 1000*10**18, 2500*10**18, 5000*10**18, 10000*10**18];
   bool[] public active = [false, true, true, true, true, true, true, true, true];
 
-  uint256[] public gananciasRango = [50*10**18, 200*10**18, 500*10**18, 1200*10**18, 6000*10**18, 15000*10**18, 50000*10**18 ];
-  uint256[] public puntosRango = [5000*10**18, 20000*10**18, 50000*10**18, 120000*10**18, 600000*10**18, 1500000*10**18, 5000000*10**18];
+  uint256[] public gananciasRango = [20*10**18, 50*10**18, 200*10**18, 500*10**18, 1200*10**18, 6000*10**18, 15000*10**18, 50000*10**18 ];
+  uint256[] public puntosRango = [1500*10**18, 5000*10**18, 20000*10**18, 50000*10**18, 120000*10**18, 600000*10**18, 1500000*10**18, 5000000*10**18];
 
   bool public onOffWitdrawl = true;
 
   uint256 public dias = 200;
   uint256 public unidades = 86400;
 
-  uint256 public porcent = 250;
+  uint256 public porcent = 200;
 
   uint256 public porcentPuntosBinario = 5;
 
