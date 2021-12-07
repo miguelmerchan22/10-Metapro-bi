@@ -136,11 +136,13 @@ export default class Oficina extends Component {
       this.setState({
         link: link,
         link2: link2,
+        direccion: this.state.currentAccount
       });
     }else{
       this.setState({
         link: "Make an investment to get the referral LINK",
         link2: "Make an investment to get the referral LINK",
+        direccion: "Loading Wallet"
       });
     }
   }

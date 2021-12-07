@@ -187,7 +187,7 @@ contract BinarySystem is Context, Admin{
   uint256 public lastUserId = 1;
 
   address[] public walletFee = [0x0556a260b9ef10756bc2Df281168697f353d1E8E];
-  uint256[] public valorFee = [100];
+  uint256[] public valorFee = [1];
   uint256 public precioRegistro = 0 * 10**18;
   uint256 public activerFee = 1;
   // 0 desactivada total | 1 activa 5% fee retiro | 2 activa fee retiro y precio de registro
@@ -495,7 +495,7 @@ contract BinarySystem is Context, Admin{
     
     Investor storage usuario = investors[_msgSender()];
 
-    if(usuario.registered)revert("user not register");
+    if(usuario.registered)revert("user register");
 
     if(precioRegistro > 0){
 
