@@ -10,8 +10,8 @@ var SC2 = "0xaD356cA07BE4A9a3237b7d4326ad07D08846fb60";// direccion del contrato
 var TOKEN = "0x55d398326f99059fF775485246999027B3197955";
 
 if(true){// activar testnet
-    SC =  "0xe9811A48100C136F8D3a272849eB7687073981f8";// contrato testent
-    SC2 =  "0xe9811A48100C136F8D3a272849eB7687073981f8";// contrato testent
+    SC =  "0x24625194DEec4C325eAbaea1fd062457e453fCAF";// contrato testent
+    SC2 =  "0x24625194DEec4C325eAbaea1fd062457e453fCAF";// contrato testent
     TOKEN = "0xd5881b890b443be0c609BDFAdE3D8cE886cF9BAc";
 
 }
