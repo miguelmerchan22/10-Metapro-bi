@@ -183,7 +183,7 @@ contract BinarySystem is Context, Admin{
   mapping (address => uint256) public addressToId;
   mapping (address => bool[]) public rangoReclamado;
   
-  uint256 public lastUserId = 2;
+  uint256 public lastUserId = 1;
 
   address public walletFee = 0x0556a260b9ef10756bc2Df281168697f353d1E8E;
   uint256 public precioRegistro = 0 * 10**18;
@@ -204,7 +204,7 @@ contract BinarySystem is Context, Admin{
     rangoReclamado[_msgSender()] = [false,false,false,false,false,false,false];
 
     idToAddress[1] = _msgSender();
-    addressToId[_msgSender()] = 1;
+    addressToId[_msgSender()] = 0;
 
   }
 
@@ -215,6 +215,11 @@ contract BinarySystem is Context, Admin{
 
   function setPrecioRegistro(uint256 _precio) public onlyOwner returns(bool){
     precioRegistro = _precio;
+    return true;
+  }
+
+  function setDescuento(uint256 _descuento) public onlyOwner returns(bool){
+    descuento = _descuento;
     return true;
   }
 
