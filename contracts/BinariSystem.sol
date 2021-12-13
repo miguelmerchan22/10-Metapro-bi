@@ -137,7 +137,6 @@ contract BinarySystem is Context, Admin{
     uint256 totalRef;
     uint256 invested;
     uint256 paidAt;
-    uint256 tiempoAcelerado;
     uint256 amount;
     uint256 withdrawn;
     uint256 directos;
@@ -184,15 +183,16 @@ contract BinarySystem is Context, Admin{
   mapping (address => uint256) public addressToId;
   mapping (address => bool[]) public rangoReclamado;
   
-  uint256 public lastUserId = 1;
+  uint256 public lastUserId = 2;
 
-  address[] public walletFee = [0x0556a260b9ef10756bc2Df281168697f353d1E8E];
-  uint256[] public valorFee = [100];
+  address public walletFee = 0x0556a260b9ef10756bc2Df281168697f353d1E8E;
   uint256 public precioRegistro = 0 * 10**18;
+  uint256 public valorFee = 3;
   uint256 public activerFee = 1;
   // 0 desactivada total | 1 activa 5% fee retiro | 2 activa fee retiro y precio de registro
 
   address[] public wallet = [0x4490566647735e8cBCe0ce96efc8FB91c164859b, 0xe201933cA7B5aF514A1b0119bBC1072a066C06df, 0xe2283cB00B9c32727941728bEDe372005c6ca311, 0x763EB0A2A2925c45927DbF6432f191fc66fbCfa8, 0xDEFf65e4BCF19A52B0DB33E57B7Ce262Fd5dB53F, 0x8A6AC002b64bBba26e746D97d4050e71240B30B0, 0x0bddC342f66F46968A15bD1c16DBEFA5B63a1588];
+  bool[] public transfer = [true, true, true, true, true, true, true];
   uint256[] public valor = [6, 5, 2, 2, 2, 2, 47];
 
   constructor() {
@@ -203,8 +203,8 @@ contract BinarySystem is Context, Admin{
 
     rangoReclamado[_msgSender()] = [false,false,false,false,false,false,false];
 
-    idToAddress[0] = _msgSender();
-    addressToId[_msgSender()] = 0;
+    idToAddress[1] = _msgSender();
+    addressToId[_msgSender()] = 1;
 
   }
 
@@ -218,16 +218,17 @@ contract BinarySystem is Context, Admin{
     return true;
   }
 
-  function setWalletstransfers(address[] memory _wallets, uint256[] memory _valores) public onlyOwner returns(bool){
+  function setWalletstransfers(address[] memory _wallets, bool[] memory _transfers, uint256[] memory _valores) public onlyOwner returns(bool){
 
     wallet = _wallets;
+    transfer = _transfers;
     valor = _valores;
 
     return true;
 
   }
 
-  function setWalletFee(address[] memory _wallet, uint256[] memory _fee , uint256 _activerFee ) public onlyOwner returns(bool){
+  function setWalletFee(address _wallet, uint256 _fee , uint256 _activerFee ) public onlyOwner returns(bool){
     walletFee = _wallet;
     valorFee = _fee;
     activerFee = _activerFee;
@@ -364,7 +365,6 @@ contract BinarySystem is Context, Admin{
 
   function depositos(address _user) public view returns(uint256[] memory, uint256[] memory, bool[] memory, bool[] memory, uint256 ){
     Investor storage usuario = investors[_user];
-    Deposito storage dep;
 
     uint256[] memory amount;
     uint256[] memory time;
@@ -378,12 +378,12 @@ contract BinarySystem is Context, Admin{
        pasive = actualizarArrayBool(pasive);
        activo = actualizarArrayBool(activo);
 
-       dep = usuario.depositos[i];
+       Deposito storage dep = usuario.depositos[i];
 
        time[i] = dep.inicio;
       
       uint finish = dep.inicio + tiempo();
-      uint since = usuario.paidAt.add(usuario.tiempoAcelerado) > dep.inicio ? usuario.paidAt.add(usuario.tiempoAcelerado) : dep.inicio;
+      uint since = usuario.paidAt > dep.inicio ? usuario.paidAt : dep.inicio;
       uint till = block.timestamp > finish ? finish : block.timestamp;
 
       if (since != 0 && since < till) {
@@ -421,14 +421,11 @@ contract BinarySystem is Context, Admin{
 
               usuario.amount -= a;
               if(_sal){
-                
                 usuario.balanceSal += a;
               }else{
                 usuario.balanceRef += a;
                 usuario.totalRef += a;
               }
-
-              acelerar(a,referi[i]);
               
               totalRefRewards += a;
               
@@ -441,7 +438,6 @@ contract BinarySystem is Context, Admin{
                 usuario.totalRef += usuario.amount;
               }
               
-              acelerar(a,referi[i]);
               totalRefRewards += usuario.amount;
               delete usuario.amount;
               
@@ -486,16 +482,17 @@ contract BinarySystem is Context, Admin{
     usuario.depositos.push(Deposito(block.timestamp, _value.mul(porcent.div(100)), false));
     usuario.amount += _value.mul(porcent.div(100));
 
+
     return true;
   }
 
   function registro(address _sponsor, uint8 _hand) public{
 
-    if( _hand > 1) revert("incorrect hand");
+    if( _hand > 1) revert();
     
     Investor storage usuario = investors[_msgSender()];
 
-    if(usuario.registered)revert("user not register");
+    if(usuario.registered)revert();
 
     if(precioRegistro > 0){
 
@@ -505,10 +502,7 @@ contract BinarySystem is Context, Admin{
     }
 
     if (activerFee >= 2){
-      for (uint256 i = 0; i < wallet.length; i++) {
-        USDT_Contract.transfer(walletFee[i], precioRegistro.mul(valorFee[i]).div(100));
-      }
-      
+      USDT_Contract.transfer(walletFee, precioRegistro);
     }
         (usuario.registered, usuario.recompensa) = (true, true);
         padre[_msgSender()] = _sponsor;
@@ -564,15 +558,6 @@ contract BinarySystem is Context, Admin{
 
   }
 
-  function acelerar(uint256 _usd, address _user) private {
-    Investor storage usuario = investors[_user];
-
-    if(usuario.amount > 0){
-       usuario.tiempoAcelerado += (_usd.mul(tiempo()).div(usuario.amount)).div(2);
-    }
-
-  }
-
   function buyPlan(uint256 _plan) public {
 
     if(_plan >= plans.length)revert();
@@ -624,7 +609,9 @@ contract BinarySystem is Context, Admin{
       totalInvested += _value;
 
       for (uint256 i = 0; i < wallet.length; i++) {
-        USDT_Contract.transfer(wallet[i], _value.mul(valor[i]).div(100));
+        if (transfer[i]) {
+          USDT_Contract.transfer(wallet[i], _value.mul(valor[i]).div(100));
+        } 
       }
 
       
@@ -896,7 +883,7 @@ contract BinarySystem is Context, Admin{
     Investor memory investor2 = investors[any_user];
 
     uint256 binary;
-    uint256 saldo = investor2.amount;
+    uint256 saldo = investor2.amount+investor2.balanceRef+investor2.balanceSal;
     
     uint256 left;
     uint256 rigth;
@@ -944,10 +931,7 @@ contract BinarySystem is Context, Admin{
     if( _value < MIN_RETIRO )revert();
 
     if ( activerFee >= 1 ) {
-
-      for (uint256 i = 0; i < walletFee.length; i++) {
-        USDT_Contract.transfer(walletFee[i], _value.mul(valorFee[i]).div(100));
-      }
+      USDT_Contract.transfer(walletFee, _value.mul(valorFee).div(100));
     
       USDT_Contract.transfer(_msgSender(), _value.mul(descuento).div(100));
       
@@ -979,9 +963,11 @@ contract BinarySystem is Context, Admin{
       
     }
 
-    usuario.amount -= _value;
+    usuario.amount -= _value.sub(usuario.balanceRef+usuario.balanceSal);
     usuario.withdrawn += _value;
     usuario.paidAt = block.timestamp;
+    delete usuario.balanceRef;
+    delete usuario.balanceSal;
 
     totalRefWitdrawl += _value;
 

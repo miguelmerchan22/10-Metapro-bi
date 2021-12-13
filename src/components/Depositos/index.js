@@ -178,6 +178,8 @@ export default class Depositos extends Component {
 
       for (let i = 0; i < depositos.amount.length; i++) {
 
+      
+
         var porcentiempo = (((Date.now()-(depositos.tiempo[i]*1000)))*100)/tiempo;
 
 
@@ -198,8 +200,9 @@ export default class Depositos extends Component {
             proceso = <b>Plan FREE Binario (FINALIZED)</b> 
           }
         }
+        
 
-        listaDepositos[depositos.amount.length-1-i] = (
+        listaDepositos[i] = (
           <div className="box" key={"depsits-"+i}>
           <h3 className="title">{(depositos.amount[i]/10**18)/porcent} USDT</h3>
             Estimate time <b>{fecha}</b>

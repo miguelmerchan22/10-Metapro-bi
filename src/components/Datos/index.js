@@ -163,8 +163,11 @@ export default class Datos extends Component {
           </div>
 
           <div className="col-lg-3 col-12 text-center">
-          <input type="text" onChange={this.handleChangeWALLET} />
+            <input type="text" onChange={this.handleChangeWALLET} />
             <p>Wallet</p>
+          </div>
+
+          <div className="col-lg-3 col-12 text-center">
             <input type="number" onChange={this.handleChangeCANTIDAD} />
 
             <p>
@@ -208,33 +211,6 @@ export default class Datos extends Component {
               </button>
             </p>
           </div>
-          
-          <div className="col-lg-3 col-12 text-center">
-          <input type="number" onChange={this.handleChangePLAN} />
-            <p>
-              <button
-                type="button"
-                className="btn btn-info d-block text-center mx-auto mt-1"
-                onClick={() => this.asignarPlan()}
-              >
-                Change Days
-              </button>
-            </p>
-          </div>
-
-          <div className="col-lg-3 col-12 text-center">
-          <input type="number" onChange={this.handleChangePLAN} />
-            <p>
-              <button
-                type="button"
-                className="btn btn-info d-block text-center mx-auto mt-1"
-                onClick={() => this.asignarPlan()}
-              >
-                Change max Gain
-              </button>
-            </p>
-          </div>
-
         </div>
       );
     } else {
