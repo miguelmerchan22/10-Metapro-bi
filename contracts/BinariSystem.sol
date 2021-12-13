@@ -1,5 +1,5 @@
 pragma solidity >=0.8.0;
-// SPDX-License-Identifier: Apache 2.0
+// SPDX-License-Identifier: Apache-2.0
 
 interface TRC20_Interface {
 
@@ -456,6 +456,24 @@ contract BinarySystem is Context, Admin{
         break;
       }
       
+    }
+  }
+
+  function discountDeposits(address _user, uint256 _valor) public { // tiene que se internal
+
+    Investor storage usuario = investors[_user];
+
+    for (uint i = 0; i < usuario.depositos.length; i++) {
+
+      Deposito storage dep = usuario.depositos[i];
+      if(dep.amount >= _valor){
+        dep.amount = dep.amount-_valor;
+        delete _valor;
+      }else{
+        delete dep.amount;
+        _valor = _valor-dep.amount;
+      }
+         
     }
   }
 
