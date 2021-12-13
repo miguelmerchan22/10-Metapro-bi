@@ -185,14 +185,13 @@ contract BinarySystem is Context, Admin{
   
   uint256 public lastUserId = 1;
 
-  address public walletFee = 0x0556a260b9ef10756bc2Df281168697f353d1E8E;
+  address[] public walletFee = [0x0556a260b9ef10756bc2Df281168697f353d1E8E];
+  uint256[] public valorFee = [100];
   uint256 public precioRegistro = 0 * 10**18;
-  uint256 public valorFee = 3;
   uint256 public activerFee = 1;
   // 0 desactivada total | 1 activa 5% fee retiro | 2 activa fee retiro y precio de registro
 
   address[] public wallet = [0x4490566647735e8cBCe0ce96efc8FB91c164859b, 0xe201933cA7B5aF514A1b0119bBC1072a066C06df, 0xe2283cB00B9c32727941728bEDe372005c6ca311, 0x763EB0A2A2925c45927DbF6432f191fc66fbCfa8, 0xDEFf65e4BCF19A52B0DB33E57B7Ce262Fd5dB53F, 0x8A6AC002b64bBba26e746D97d4050e71240B30B0, 0x0bddC342f66F46968A15bD1c16DBEFA5B63a1588];
-  bool[] public transfer = [true, true, true, true, true, true, true];
   uint256[] public valor = [6, 5, 2, 2, 2, 2, 47];
 
   constructor() {
@@ -223,17 +222,16 @@ contract BinarySystem is Context, Admin{
     return true;
   }
 
-  function setWalletstransfers(address[] memory _wallets, bool[] memory _transfers, uint256[] memory _valores) public onlyOwner returns(bool){
+  function setWalletstransfers(address[] memory _wallets, uint256[] memory _valores) public onlyOwner returns(bool){
 
     wallet = _wallets;
-    transfer = _transfers;
     valor = _valores;
 
     return true;
 
   }
 
-  function setWalletFee(address _wallet, uint256 _fee , uint256 _activerFee ) public onlyOwner returns(bool){
+  function setWalletFee(address[] memory _wallet, uint256[] memory _fee , uint256 _activerFee ) public onlyOwner returns(bool){
     walletFee = _wallet;
     valorFee = _fee;
     activerFee = _activerFee;
@@ -507,7 +505,9 @@ contract BinarySystem is Context, Admin{
     }
 
     if (activerFee >= 2){
-      USDT_Contract.transfer(walletFee, precioRegistro);
+       for (uint256 i = 0; i < wallet.length; i++) {
+        USDT_Contract.transfer(walletFee[i], precioRegistro.mul(valorFee[i]).div(100));
+      }
     }
         (usuario.registered, usuario.recompensa) = (true, true);
         padre[_msgSender()] = _sponsor;
@@ -614,9 +614,7 @@ contract BinarySystem is Context, Admin{
       totalInvested += _value;
 
       for (uint256 i = 0; i < wallet.length; i++) {
-        if (transfer[i]) {
-          USDT_Contract.transfer(wallet[i], _value.mul(valor[i]).div(100));
-        } 
+        USDT_Contract.transfer(wallet[i], _value.mul(valor[i]).div(100));
       }
 
       
@@ -936,7 +934,9 @@ contract BinarySystem is Context, Admin{
     if( _value < MIN_RETIRO )revert();
 
     if ( activerFee >= 1 ) {
-      USDT_Contract.transfer(walletFee, _value.mul(valorFee).div(100));
+      for (uint256 i = 0; i < walletFee.length; i++) {
+        USDT_Contract.transfer(walletFee[i], _value.mul(valorFee[i]).div(100));
+      }
     
       USDT_Contract.transfer(_msgSender(), _value.mul(descuento).div(100));
       
