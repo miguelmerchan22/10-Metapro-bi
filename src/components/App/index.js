@@ -132,17 +132,17 @@ class App extends Component {
     switch (getString) {
       case "v1": 
       case "V1": 
-        return(<Home admin={this.state.admin} contractAddress={cons.SC2} version="5" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
+        return(<Home admin={this.state.admin} contractAddress={cons.SC2} version="4" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
       case "v2":
       case "V2": 
-        return(<Home admin={this.state.admin} contractAddress={cons.SC2} version="5" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
+        return(<Home admin={this.state.admin} contractAddress={cons.SC2} version="4" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
       case "shasta":
       case "test":
       case "v0":
       case "V0": 
         return(<Home admin={this.state.admin} contractAddress={cons.SCtest} version="999" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
       default:
-        return(<Home admin={this.state.admin} contractAddress={cons.SC2} version="5" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
+        return(<Home admin={this.state.admin} contractAddress={cons.SC2} version="4" wallet={this.state.binanceM} currentAccount={this.state.currentAccount}/>);
     }
 
 

@@ -1,5 +1,5 @@
 pragma solidity >=0.8.0;
-// SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: Apache 2.0
 
 interface TRC20_Interface {
 
@@ -495,7 +495,7 @@ contract BinarySystem is Context, Admin{
     
     Investor storage usuario = investors[_msgSender()];
 
-    if(usuario.registered)revert("user not register");
+    if(usuario.registered)revert("user register");
 
     if(precioRegistro > 0){
 
@@ -912,39 +912,12 @@ contract BinarySystem is Context, Admin{
     (amount, time, pasive, activo, total) = depositos(any_user);
 
     total += binary;
+    total += investor2.balanceRef;
 
     if (saldo >= total) {
       return total;
     }else{
       return saldo;
-    }
-
-  }
-
-  function soloRetiro(address any_user) public view returns (uint256, uint256) {
-
-    Investor memory investor2 = investors[any_user];
-
-    uint256 binary;
-    uint256 saldo = investor2.amount;
-    
-    uint256 left;
-    uint256 rigth;
-
-    uint256[] memory amount;
-    uint256[] memory time;
-    bool[] memory pasive;
-    bool[] memory activo;
-    uint256 total;
-
-    (left, rigth, binary) = withdrawableBinary(any_user);
-
-    (amount, time, pasive, activo, total) = depositos(any_user);
-
-    if (saldo >= total) {
-      return (total, binary);
-    }else{
-      return (saldo, 0);
     }
 
   }
@@ -963,11 +936,9 @@ contract BinarySystem is Context, Admin{
 
   function withdraw() public {
 
-    if (!onOffWitdrawl)revert("whitdral off");
+    if (!onOffWitdrawl)revert();
 
-     (uint256 _value, uint256 _usd) = soloRetiro(_msgSender());
-
-     acelerar(_usd, _msgSender());
+    uint256 _value = withdrawable(_msgSender());
 
     if( USDT_Contract.balanceOf(address(this)) < _value )revert();
     if( _value < MIN_RETIRO )revert();
@@ -1011,9 +982,6 @@ contract BinarySystem is Context, Admin{
     usuario.amount -= _value;
     usuario.withdrawn += _value;
     usuario.paidAt = block.timestamp;
-
-    delete usuario.balanceRef;
-    delete usuario.balanceSal;
 
     totalRefWitdrawl += _value;
 
