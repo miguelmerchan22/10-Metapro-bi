@@ -202,7 +202,7 @@ contract BinarySystem is Context, Admin{
 
     rangoReclamado[_msgSender()] = [false,false,false,false,false,false,false];
 
-    idToAddress[1] = _msgSender();
+    idToAddress[0] = _msgSender();
     addressToId[_msgSender()] = 0;
 
   }

@@ -31,7 +31,7 @@ export default class Datos extends Component {
       var resultado = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      console.log(resultado[0]);
+      //console.log(resultado[0]);
       this.setState({
         currentAccount: resultado[0],
       });
@@ -41,7 +41,7 @@ export default class Datos extends Component {
         var resultado = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        console.log(resultado[0]);
+        //console.log(resultado[0]);
         this.setState({
           currentAccount: resultado[0],
         });

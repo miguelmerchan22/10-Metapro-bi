@@ -61,7 +61,7 @@ export default class Oficina extends Component {
   async componentDidMount() {
     if (typeof window.ethereum !== 'undefined') {           
       var resultado = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        console.log(resultado[0]);
+        //console.log(resultado[0]);
         this.setState({
           currentAccount: resultado[0]
         })
@@ -70,7 +70,7 @@ export default class Oficina extends Component {
     setInterval(async() => {
       if (typeof window.ethereum !== 'undefined') {           
         var resultado = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          console.log(resultado[0]);
+          //console.log(resultado[0]);
           this.setState({
             currentAccount: resultado[0]
           })
@@ -82,7 +82,7 @@ export default class Oficina extends Component {
     setInterval(() => this.Investors2(),3*1000);
     setInterval(() => this.Investors3(),3*1000);
     setInterval(() => this.Investors(),3*1000);
-    setInterval(() => this.rango(),3*1000);
+    //setInterval(() => this.rango(),3*1000);
     setInterval(() => this.Link(),3*1000);
 
     
@@ -315,7 +315,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 5000 && rango < 20000) {
       rango = "Sapphire"
-      if(!rangoArray[0]){
+      if(!rangoArray[1]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(1).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
@@ -327,7 +327,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 20000 && rango < 50000) {
       rango = "Ruby"
-      if(!rangoArray[1]){
+      if(!rangoArray[2]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(2).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
@@ -339,7 +339,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 50000 && rango < 120000) {
       rango = "Emerauld"
-      if(!rangoArray[2]){
+      if(!rangoArray[3]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(3).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
@@ -351,7 +351,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 120000 && rango < 600000) {
       rango = "Diamond"
-      if(!rangoArray[2]){
+      if(!rangoArray[4]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(4).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
@@ -363,7 +363,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 600000 && rango < 1500000) {
       rango = "Blue Diamond"
-      if(!rangoArray[2]){
+      if(!rangoArray[5]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(5).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
@@ -375,7 +375,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 1500000 && rango < 5000000) {
       rango = "Black Diamond"
-      if(!rangoArray[2]){
+      if(!rangoArray[6]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(6).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;
@@ -387,7 +387,7 @@ export default class Oficina extends Component {
     }
     if (rango >= 5000000) {
       rango = "Crown Diamond"
-      if(!rangoArray[2]){
+      if(!rangoArray[7]){
         rangoEstilo = "btn-success";
         cantidad = await this.props.wallet.contractBinary.methods.gananciasRango(7).call({from:this.state.currentAccount});
         cantidad = cantidad / 10 ** 18;

@@ -40,7 +40,7 @@ export default class CrowdFunding extends Component {
   async componentDidMount() {
     if (typeof window.ethereum !== 'undefined') {           
       var resultado = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        console.log(resultado[0]);
+        //console.log(resultado[0]);
         this.setState({
           currentAccount: resultado[0]
         })
@@ -49,7 +49,7 @@ export default class CrowdFunding extends Component {
     setInterval(async() => {
       if (typeof window.ethereum !== 'undefined') {           
         var resultado = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          console.log(resultado[0]);
+          //console.log(resultado[0]);
           this.setState({
             currentAccount: resultado[0]
           })
@@ -57,7 +57,7 @@ export default class CrowdFunding extends Component {
       }
 
     },3*1000);
-    this.estado();
+
     setInterval(() => this.estado(),3*1000);
     setInterval(() => this.estado2(),3*1000);
     
@@ -145,12 +145,7 @@ export default class CrowdFunding extends Component {
 
     var nameToken1 = await this.props.wallet.contractToken.methods.symbol().call({from:this.state.currentAccount});
 
-    //console.log(nameToken1);
-
     var aprovado = await this.props.wallet.contractToken.methods.allowance(accountAddress,this.props.contractAddress).call({from:this.state.currentAccount});
-    //console.log(aprovado);
-
-    //console.log(aprovado);
 
     if (aprovado > 0) {
       if(!inversors.registered){
@@ -198,6 +193,7 @@ export default class CrowdFunding extends Component {
       var loc = document.location.href;
       if(loc.indexOf('?')>0){
           var getString = loc.split('?');
+          //console.log(getString)
           getString = getString[getString.length-1];
           //console.log(getString);
           var GET = getString.split('&');
@@ -225,13 +221,13 @@ export default class CrowdFunding extends Component {
             var wallet = await this.props.wallet.contractBinary.methods.idToAddress(tmp[0]).call({from:this.state.currentAccount});
 
             inversors = await this.props.wallet.contractBinary.methods.investors(wallet).call({from:this.state.currentAccount});
-
+            //console.log(wallet);
             if ( inversors.registered ) {
               partner = "team "+hand+" of "+wallet;
             }
           }
 
-          
+        
       }
 
     }
