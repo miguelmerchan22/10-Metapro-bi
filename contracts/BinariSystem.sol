@@ -423,6 +423,9 @@ contract BinarySystem is Context, Admin{
             if (usuario.amount > a+withdrawable(_msgSender())) {
 
               usuario.amount -= a;
+
+              discountDeposits(referi[i], a);
+
               if(_sal){
                 usuario.balanceSal += a;
               }else{
@@ -440,6 +443,8 @@ contract BinarySystem is Context, Admin{
                 usuario.balanceRef += usuario.amount;
                 usuario.totalRef += usuario.amount;
               }
+
+              discountDeposits(referi[i], usuario.amount);
               
               totalRefRewards += usuario.amount;
               delete usuario.amount;
