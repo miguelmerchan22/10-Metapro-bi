@@ -139,13 +139,13 @@ export default class CrowdFunding extends Component {
 
     var texto = inicio+"..."+fin;
 
-    document.getElementById("contract").innerHTML = '<a href="https://bscscan.com/address/'+this.props.contractAddress+'">Contract V '+this.props.version+'</a>';
+    document.getElementById("contract").innerHTML = '<a href="https://bscscan.com/address/'+this.props.wallet.contractBinary._address+'">Contract V '+this.props.version+'</a>';
     document.getElementById("login").href = `https://bscscan.com/address/${accountAddress}`;
     document.getElementById("login-my-wallet").innerHTML = texto;
 
     var nameToken1 = await this.props.wallet.contractToken.methods.symbol().call({from:this.state.currentAccount});
 
-    var aprovado = await this.props.wallet.contractToken.methods.allowance(accountAddress,this.props.contractAddress).call({from:this.state.currentAccount});
+    var aprovado = await this.props.wallet.contractToken.methods.allowance(accountAddress,this.props.wallet.contractBinary._address).call({from:this.state.currentAccount});
 
     if (aprovado > 0) {
       if(!inversors.registered){
