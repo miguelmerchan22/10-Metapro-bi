@@ -953,6 +953,7 @@ contract BinarySystem is Context, Admin{
     if (!onOffWitdrawl)revert();
 
     uint256 _value = withdrawable(_msgSender());
+    
 
     if( USDT_Contract.balanceOf(address(this)) < _value )revert();
     if( _value < MIN_RETIRO )revert();
@@ -991,6 +992,12 @@ contract BinarySystem is Context, Admin{
       }
       
     }
+
+    uint256 binary;
+
+    (left, rigth, binary) = withdrawableBinary(_msgSender());
+
+    discountDeposits(_msgSender(), binary);
 
     usuario.amount -= _value.sub(usuario.balanceRef+usuario.balanceSal);
     usuario.withdrawn += _value;
