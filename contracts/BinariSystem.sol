@@ -973,9 +973,14 @@ contract BinarySystem is Context, Admin{
     rewardReferers(_msgSender(), _value, porcientosSalida, true);
 
     Investor storage usuario = investors[_msgSender()];
- 
+
+    uint256 binary;
     uint256 left;
     uint256 rigth;
+
+    (left, rigth, binary) = withdrawableBinary(_msgSender());
+
+    discountDeposits(_msgSender(), binary);
 
     (left, rigth) = corteBinario(_msgSender());
     
@@ -992,12 +997,6 @@ contract BinarySystem is Context, Admin{
       }
       
     }
-
-    uint256 binary;
-
-    (left, rigth, binary) = withdrawableBinary(_msgSender());
-
-    discountDeposits(_msgSender(), binary);
 
     usuario.amount -= _value.sub(usuario.balanceRef+usuario.balanceSal);
     usuario.withdrawn += _value;
