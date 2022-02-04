@@ -28,7 +28,7 @@ class App extends Component {
       admin: false,
       metamask: false,
       conectado: false,
-      currentAccount: null,
+      currentAccount: "0x0000000000000000000000000000000000000000",
       binanceM:{
         web3: null,
         contractToken: null,

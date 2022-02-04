@@ -535,6 +535,53 @@ export default class Oficina extends Component {
 
         </div>
 
+        <div className="row text-center">
+          <div className="col-md-6 col-lg-10 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1s">
+            <div className="box">
+              <table border="1px" width="100%">
+                <tr>
+                  <th>/</th>
+                  <th>Team</th>
+                  <th>Bonus</th>
+                  <th>Total Bonus</th>
+                </tr>
+                <tr>
+                  <td><b>1.</b></td>
+                  <td>packs USDT</td>
+                  <td>Bonus</td>
+                  <td>Total Bonus</td>
+                </tr>
+                <tr>
+                  <td><b>2.</b></td>
+                  <td>packs USDT</td>
+                  <td>Bonus</td>
+                  <td>Total Bonus</td>
+                </tr>
+                <tr>
+                  <td><b>3.</b></td>
+                  <td>packs USDT</td>
+                  <td>Bonus</td>
+                  <td>Total Bonus</td>
+                </tr>
+                <tr>
+                  <td><b>4.</b></td>
+                  <td>packs USDT</td>
+                  <td>Bonus</td>
+                  <td>Total Bonus</td>
+                </tr>
+                <tr>
+                  <td><b>TOTAL</b></td>
+                  <td>packs USDT</td>
+                  <td>Bonus</td>
+                  <td>Total Bonus</td>
+                </tr>
+             
+              </table>
+
+            </div>
+          </div>
+        </div>
+
       </div>
 
     );
