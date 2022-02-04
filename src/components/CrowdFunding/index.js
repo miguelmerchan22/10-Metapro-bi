@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Select from 'react-select'
 
 import cons from "../../cons.js";
 
@@ -12,14 +11,15 @@ export default class CrowdFunding extends Component {
       min: 100,
       deposito: "Loading...",
       balance: "Loading...",
-      accountAddress: "Loading...",
+      accountAddress: "0x0000000000000000000000000000000000000000",
+      currentAccount: "0x0000000000000000000000000000000000000000",
       porcentaje: "Loading...",
       dias: "Loading...",
       partner: "Loading...",
       balanceTRX: "Loading...",
       balanceUSDT: "Loading...",
       precioSITE: 1,
-      valueUSDT: 0,
+      valueUSDT: 1,
       hand: 0
 
     };
@@ -28,13 +28,13 @@ export default class CrowdFunding extends Component {
     this.estado = this.estado.bind(this);
     this.estado2 = this.estado2.bind(this);
 
-    this.rateSITE = this.rateSITE.bind(this);
     this.handleChangeUSDT = this.handleChangeUSDT.bind(this);
   }
 
   handleChangeUSDT(event) {
-    //console.log(event)
-    this.setState({valueUSDT: event.value});
+
+    this.setState({valueUSDT: event.target.value});
+    console.log(this.state.valueUSDT)
   }
 
   async componentDidMount() {
@@ -61,31 +61,6 @@ export default class CrowdFunding extends Component {
     setInterval(() => this.estado(),3*1000);
     setInterval(() => this.estado2(),3*1000);
     
-  };
-
-  async rateSITE(){
-    /*
-    var proxyUrl = cons.proxy;
-    var apiUrl = cons.PRE;
-    var response;
-
-    try {
-      response = await fetch(proxyUrl+apiUrl);
-    } catch (err) {
-      console.log(err);
-      return this.state.precioSITE;
-    }
-
-    var json = await response.json();
-
-    this.setState({
-      precioSITE: json.Data.precio
-    });
-
-    return json.Data.precio;*/
-
-    return 1;
-
   };
 
   async estado(){
@@ -236,10 +211,7 @@ export default class CrowdFunding extends Component {
       partner = "---------------------------------";
     }
     
-
-    var dias = 365;//await Utils.contract.tiempo().call();
-
-    //var velocidad = await Utils.contract.velocidad().call();
+    var dias = await this.props.wallet.contractBinary.methods.tiempo().call({from:this.state.currentAccount});
 
     //dias = (parseInt(dias)/86400)*velocidad;
 
@@ -282,8 +254,9 @@ export default class CrowdFunding extends Component {
       return;
     }
 
-    var amount = await this.props.wallet.contractBinary.methods.plans(valueUSDT).call({from:this.state.currentAccount});
+    var amount = await this.props.wallet.contractBinary.methods.plan().call({from:this.state.currentAccount});
     amount = amount/10**18;
+    amount = amount*valueUSDT;
     amount = amount-balance;
 
     if ( aprovado > 0 && 
@@ -409,8 +382,6 @@ export default class CrowdFunding extends Component {
 
   render() {
 
-    var {options} = this.state;
-
     return (
       <div className="card wow bounceInUp text-center col-md-7" >
         <div className="card-body">
@@ -438,9 +409,15 @@ export default class CrowdFunding extends Component {
           </p>
 
           <h4>Plan Staking</h4>
-          <div className="input-group sm-3 text-center">
-            <Select options={options}  onChange={this.handleChangeUSDT} className="form-control mb-20 h-auto" />
+          <div className="card wow bounceInUp text-center col-auto" >
+            <div className="card-body">
+              <h2><b>{"50 USDT X "+this.state.valueUSDT+" = "+(this.state.valueUSDT*50)+" USDT"} </b></h2>
+              <div className="input-group sm-3 text-center">
+                <input type={"number"} value={this.state.valueUSDT} step="1" onChange={this.handleChangeUSDT} className="form-control mb-20 text-center h-auto w-auto" />
+              </div>
+            </div>
           </div>
+          
 
             <p className="card-text">At least 0.03 BNB to make any transactions</p>
             <p className="card-text">Partner:<br />

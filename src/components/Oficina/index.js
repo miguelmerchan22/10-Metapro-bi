@@ -539,42 +539,69 @@ export default class Oficina extends Component {
           <div className="col-md-6 col-lg-10 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1s">
             <div className="box">
               <table border="1px" width="100%">
-                <tr>
-                  <th>/</th>
-                  <th>Team</th>
-                  <th>Bonus</th>
-                  <th>Total Bonus</th>
-                </tr>
-                <tr>
-                  <td><b>1.</b></td>
-                  <td>packs USDT</td>
-                  <td>Bonus</td>
-                  <td>Total Bonus</td>
-                </tr>
-                <tr>
-                  <td><b>2.</b></td>
-                  <td>packs USDT</td>
-                  <td>Bonus</td>
-                  <td>Total Bonus</td>
-                </tr>
-                <tr>
-                  <td><b>3.</b></td>
-                  <td>packs USDT</td>
-                  <td>Bonus</td>
-                  <td>Total Bonus</td>
-                </tr>
-                <tr>
-                  <td><b>4.</b></td>
-                  <td>packs USDT</td>
-                  <td>Bonus</td>
-                  <td>Total Bonus</td>
-                </tr>
-                <tr>
-                  <td><b>TOTAL</b></td>
-                  <td>packs USDT</td>
-                  <td>Bonus</td>
-                  <td>Total Bonus</td>
-                </tr>
+
+                <thead>
+                  <tr>
+                    <th>\</th>
+                    <th>Team L</th>
+                    <th>team R</th>
+                    <th>Points L</th>
+                    <th>Points R</th>
+                    <th>Capital L</th>
+                    <th>Capital R</th>
+                    <th>Total Bonus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>Binary</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>Reaferals</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>Level 1</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>Level 2</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>Level 3</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>Level 4</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>Level 5</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                  <tr>
+                    <td><b>TOTAL</b></td>
+                    <td>packs USDT</td>
+                    <td>Bonus</td>
+                    <td>Total Bonus</td>
+                  </tr>
+                </tbody>
              
               </table>
 

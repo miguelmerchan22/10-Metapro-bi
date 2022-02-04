@@ -46,15 +46,10 @@ class App extends Component {
       this.conectar();
     }, 3*1000);
 
-    
-    this.setState({
-      
-
-    })
-
   }
 
   async conectar(){
+
 
         if (typeof window.ethereum !== 'undefined') {  
           
@@ -67,9 +62,10 @@ class App extends Component {
             params: [{ chainId: chainId}],
           });
 
+
           window.ethereum.request({ method: 'eth_requestAccounts' })
           .then(async(accounts) => {
-            //console.log(accounts)
+            
             var web3 = new Web3(window.web3.currentProvider);
             var contractToken = new web3.eth.Contract(
               abiToken,

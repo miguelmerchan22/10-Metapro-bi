@@ -131,7 +131,6 @@ contract BinarySystem is Context, Admin{
 
   struct Investor {
     bool registered;
-    bool recompensa;
     uint256 balanceRef;
     uint256 balanceSal;
     uint256 totalRef;
@@ -147,6 +146,8 @@ contract BinarySystem is Context, Admin{
   uint256 public MIN_RETIRO = 30*10**18;
   uint256 public MIN_RETIRO_interno;
 
+  uint256 public plan = 50*10**18;
+
   address public tokenPricipal = token;
 
   uint256 public inversiones = 1;
@@ -154,9 +155,7 @@ contract BinarySystem is Context, Admin{
   uint256[] public porcientos = [0, 0, 0, 0, 0];
   uint256[] public porcientosSalida = [10, 4, 3, 2, 1];
 
-  uint256[] public plans = [0, 50*10**18, 100*10**18, 250*10**18, 500*10**18, 1000*10**18, 2500*10**18, 5000*10**18, 10000*10**18];
-  bool[] public active = [false, true, true, true, true, true, true, true, true];
-
+  bool[] public espaciosRango = [false,false,false,false,false,false,false];
   uint256[] public gananciasRango = [20*10**18, 50*10**18, 200*10**18, 500*10**18, 1200*10**18, 6000*10**18, 15000*10**18, 50000*10**18 ];
   uint256[] public puntosRango = [1500*10**18, 5000*10**18, 20000*10**18, 50000*10**18, 120000*10**18, 600000*10**18, 1500000*10**18, 5000000*10**18];
 
@@ -198,9 +197,9 @@ contract BinarySystem is Context, Admin{
 
     Investor storage usuario = investors[owner];
 
-    ( usuario.registered, usuario.recompensa ) = (true,true);
+    usuario.registered = true;
 
-    rangoReclamado[_msgSender()] = [false,false,false,false,false,false,false];
+    rangoReclamado[_msgSender()] = espaciosRango;
 
     idToAddress[0] = _msgSender();
     addressToId[_msgSender()] = 0;
@@ -295,14 +294,9 @@ contract BinarySystem is Context, Admin{
 
   }
 
-  function plansLength() public view returns(uint8){
-    
-    return uint8(plans.length);
-  }
 
-  function setPlansAll(uint256[] memory _values, bool[] memory _true) public onlyOwner returns(bool){
-    plans = _values ;
-    active = _true ;
+  function setPlan(uint256 _value) public onlyOwner returns(bool){
+    plan = _value;
     return true;
   }
 
@@ -416,7 +410,7 @@ contract BinarySystem is Context, Admin{
 
       if (array[i] != 0) {
         usuario = investors[referi[i]];
-        if (usuario.registered && usuario.recompensa && usuario.amount > 0){
+        if (usuario.registered && usuario.amount > 0){
           if ( referi[i] != address(0) ) {
 
             a = amount.mul(array[i]).div(1000);
@@ -497,14 +491,13 @@ contract BinarySystem is Context, Admin{
   }
 
   function asignarPlan(address _user ,uint256 _plan) public onlyAdmin returns (bool){
-    if(_plan >= plans.length )revert();
-    if(!active[_plan])revert();
+    if(_plan <= 0 )revert();
 
     Investor storage usuario = investors[_user];
 
     if(!usuario.registered)revert();
 
-    uint256 _value = plans[_plan];
+    uint256 _value = plan * _plan;
 
     usuario.depositos.push(Deposito(block.timestamp, _value.mul(porcent.div(100)), false));
     usuario.amount += _value.mul(porcent.div(100));
@@ -533,7 +526,7 @@ contract BinarySystem is Context, Admin{
         USDT_Contract.transfer(walletFee[i], precioRegistro.mul(valorFee[i]).div(100));
       }
     }
-        (usuario.registered, usuario.recompensa) = (true, true);
+        usuario.registered = true;
         padre[_msgSender()] = _sponsor;
 
         if (_sponsor != address(0) ){
@@ -578,7 +571,7 @@ contract BinarySystem is Context, Admin{
         
         totalInvestors++;
 
-        rangoReclamado[_msgSender()] = [false,false,false,false,false,false,false];
+        rangoReclamado[_msgSender()] = espaciosRango;
         idToAddress[lastUserId] = _msgSender();
         addressToId[_msgSender()] = lastUserId;
         
@@ -589,14 +582,13 @@ contract BinarySystem is Context, Admin{
 
   function buyPlan(uint256 _plan) public {
 
-    if(_plan >= plans.length)revert();
-    if(!active[_plan])revert();
+    if(_plan <= 0 )revert();
 
     Investor storage usuario = investors[_msgSender()];
 
     if ( usuario.registered) {
 
-      uint256 _value = plans[_plan];
+      uint256 _value = plan * _plan;
 
       if( USDT_Contract.allowance(_msgSender(), address(this)) < _value)revert();
       if( !USDT_Contract.transferFrom(_msgSender(), address(this), _value) )revert();
