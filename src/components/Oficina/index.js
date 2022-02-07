@@ -555,13 +555,13 @@ export default class Oficina extends Component {
                 <tbody>
                   <tr>
                     <td><b>Binary</b></td>
-                    <td>Team L</td>
-                    <td>team R</td>
-                    <td>Points L</td>
-                    <td>Points R</td>
-                    <td>Capital L</td>
-                    <td>Capital R</td>
-                    <td>5% pierna menor</td>
+                    <td>{this.state.personasIzquierda}</td>
+                    <td>{this.state.personasDerecha}</td>
+                    <td>{this.state.puntosEfectivosIzquierda/2}</td>
+                    <td>{this.state.puntosEfectivosDerecha/2}</td>
+                    <td>{(this.state.puntosIzquierda/2)*50} USDT</td>
+                    <td>{(this.state.puntosDerecha/2)*50} USDT</td>
+                    <td>{(this.state.bonusBinario).toFixed(2)} USDT</td>
                   </tr>
                   <tr>
                     <td><b>Reaferals</b></td>
@@ -625,9 +625,9 @@ export default class Oficina extends Component {
                   </tr>
                   <tr>
                     <td><b>TOTAL</b></td>
-                    <td colspan="2">T Team L + R</td>
-                    <td colspan="2">T Points L + R</td>
-                    <td colspan="2">T Capital R + L</td>
+                    <td colSpan="2">T Team L + R</td>
+                    <td colSpan="2">T Points L + R</td>
+                    <td colSpan="2">T Capital R + L</td>
                     <td>Total Bonus</td>
                   </tr>
                 </tbody>

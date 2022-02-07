@@ -65,42 +65,7 @@ export default class CrowdFunding extends Component {
 
   async estado(){
 
-    //console.log(this.props.wallet);
 
-    var inversors = await this.props.wallet.contractBinary.methods.investors(this.state.currentAccount).call({from:this.state.currentAccount});
-
-    var options = [];
-
-    var datos = {};
-
-    inversors.inicio = 1000;
-
-    var aprovado = await this.props.wallet.contractToken.methods.allowance(this.state.currentAccount,this.props.contractAddress).call({from:this.state.currentAccount});
-    
-
-    if (aprovado > 0) {
-
-      var top = await this.props.wallet.contractBinary.methods.plansLength().call({from:this.state.currentAccount});
-
-      for (let index = 0; index < top; index++) {
-        var precio = await this.props.wallet.contractBinary.methods.plans(index).call({from:this.state.currentAccount});
-        var active = await this.props.wallet.contractBinary.methods.active(index).call({from:this.state.currentAccount});
-        precio = parseInt(precio)/10**18;
-        if( precio > 0 && active && inversors.registered){
-          datos = {};
-          datos.value = index;
-          datos.label = precio+' USDT';
-          options[index] = datos;
-
-        }
-        
-        
-      }
-    }
-
-    this.setState({
-      options: options
-    });
 
   }
 
@@ -322,7 +287,7 @@ export default class CrowdFunding extends Component {
           
         }
 
-        if(sponsor !== "0x0000000000000000000000000000000000000000" && investors.registered && await this.props.wallet.contractBinary.methods.active(valueUSDT).call({from:this.state.currentAccount}) ){
+        if(sponsor !== "0x0000000000000000000000000000000000000000" && investors.registered && parseInt(valueUSDT) > 0 ){
         
           var userWithdrable = await this.props.wallet.contractBinary.methods.withdrawable(this.state.currentAccount).call({from:this.state.currentAccount});
           var MIN_RETIRO = await this.props.wallet.contractBinary.methods.MIN_RETIRO().call({from:this.state.currentAccount});
@@ -357,11 +322,15 @@ export default class CrowdFunding extends Component {
           }
           
         }else{
-          if (await this.props.wallet.contractBinary.methods.active(valueUSDT).call({from:this.state.currentAccount}) === false) {
-            window.alert("Please select an active plan");
-          } else {
+
+          if(valueUSDT <= 0){
+            window.alert("Invalid imput to buy a plan");
+          }else{
             window.alert("Please use referral link to buy a plan");
           }
+
+          
+          
 
           
         }

@@ -7,7 +7,7 @@ const WS = "0x0000000000000000000000000000000000000000";//0x00000000000000000000
 const SC = "0xaD356cA07BE4A9a3237b7d4326ad07D08846fb60";// direccion del contrato V1
 const TOKEN = "0x55d398326f99059fF775485246999027B3197955";
 
-const SCtest = "0x9eCabcbef6050B5c1F1b0061Cadc59d7FbfdE43e";// direccion del contrato de pruebas test only no real
+const SCtest = "0x42547fd58f6f81711307F2b6728257580F02167e";// direccion del contrato de pruebas test only no real
 const TOKENtest = "0xd5881b890b443be0c609BDFAdE3D8cE886cF9BAc";
 
 const testnet = true;
