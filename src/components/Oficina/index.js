@@ -555,50 +555,79 @@ export default class Oficina extends Component {
                 <tbody>
                   <tr>
                     <td><b>Binary</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>Team L</td>
+                    <td>team R</td>
+                    <td>Points L</td>
+                    <td>Points R</td>
+                    <td>Capital L</td>
+                    <td>Capital R</td>
+                    <td>5% pierna menor</td>
                   </tr>
                   <tr>
                     <td><b>Reaferals</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>Team L D</td>
+                    <td>team R D</td>
+                    <td>Points L D</td>
+                    <td>Points R D</td>
+                    <td>Capital L D</td>
+                    <td>Capital R D</td>
+                    <td>5% de los directos</td>
                   </tr>
                   <tr>
                     <td><b>Level 1</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>equipo en el niv 1 L</td>
+                    <td>equipo en el nivel 1 R</td>
+                    <td>puntos Niv 1 L	</td>
+                    <td>Puntos Niv 1 R	</td>
+                    <td>Capital niv 1 L	</td>
+                    <td>capital niv 1 R	</td>
+                    <td>total Capital niv1 * 2 * %niv 1</td>
                   </tr>
                   <tr>
                     <td><b>Level 2</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>equipo en el niv 1 L</td>
+                    <td>equipo en el nivel 1 R</td>
+                    <td>puntos Niv 1 L	</td>
+                    <td>Puntos Niv 1 R	</td>
+                    <td>Capital niv 1 L	</td>
+                    <td>capital niv 1 R	</td>
+                    <td>total Capital niv2 * 2 * %niv 1</td>
                   </tr>
                   <tr>
                     <td><b>Level 3</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>equipo en el niv 1 L</td>
+                    <td>equipo en el nivel 1 R</td>
+                    <td>puntos Niv 1 L	</td>
+                    <td>Puntos Niv 1 R	</td>
+                    <td>Capital niv 1 L	</td>
+                    <td>capital niv 1 R	</td>
+                    <td>total Capital niv3 * 2 * %niv 1</td>
                   </tr>
                   <tr>
                     <td><b>Level 4</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>equipo en el niv 1 L</td>
+                    <td>equipo en el nivel 1 R</td>
+                    <td>puntos Niv 1 L	</td>
+                    <td>Puntos Niv 1 R	</td>
+                    <td>Capital niv 1 L	</td>
+                    <td>capital niv 1 R	</td>
+                    <td>total Capital niv4 * 2 * %niv 1</td>
                   </tr>
                   <tr>
                     <td><b>Level 5</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
-                    <td>Total Bonus</td>
+                    <td>equipo en el niv 1 L</td>
+                    <td>equipo en el nivel 1 R</td>
+                    <td>puntos Niv 1 L	</td>
+                    <td>Puntos Niv 1 R	</td>
+                    <td>Capital niv 1 L	</td>
+                    <td>capital niv 1 R	</td>
+                    <td>total Capital niv5 * 2 * %niv 1</td>
                   </tr>
                   <tr>
                     <td><b>TOTAL</b></td>
-                    <td>packs USDT</td>
-                    <td>Bonus</td>
+                    <td colspan="2">T Team L + R</td>
+                    <td colspan="2">T Points L + R</td>
+                    <td colspan="2">T Capital R + L</td>
                     <td>Total Bonus</td>
                   </tr>
                 </tbody>
