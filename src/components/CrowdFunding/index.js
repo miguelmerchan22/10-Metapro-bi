@@ -20,6 +20,7 @@ export default class CrowdFunding extends Component {
       balanceUSDT: "Loading...",
       precioSITE: 1,
       valueUSDT: 1,
+      valueUSDTResult: 50,
       hand: 0
 
     };
@@ -29,12 +30,39 @@ export default class CrowdFunding extends Component {
     this.estado2 = this.estado2.bind(this);
 
     this.handleChangeUSDT = this.handleChangeUSDT.bind(this);
+    this.handleChangeUSDTResult = this.handleChangeUSDTResult.bind(this);
   }
 
-  handleChangeUSDT(event) {
+  async handleChangeUSDT(event) {
 
-    this.setState({valueUSDT: event.target.value});
-    console.log(this.state.valueUSDT)
+    await this.setState({valueUSDT: event.target.value});
+
+    if(parseInt(this.state.valueUSDT) < 1){
+      await this.setState({valueUSDT: 1});
+    }
+
+
+    
+    this.setState({valueUSDTResult: parseInt(this.state.valueUSDT*50)});
+  }
+
+  async handleChangeUSDTResult(event) {
+
+    await this.setState({valueUSDTResult: event.target.value});
+    //console.log(this.state.valueUSDTResult%50)
+    if(parseInt(this.state.valueUSDTResult) < 50){
+      await this.setState({valueUSDTResult: 50});
+    }else{
+      if(this.state.valueUSDTResult%50 === 0){
+        await this.setState({valueUSDTResult: this.state.valueUSDTResult-(this.state.valueUSDTResult%50)});
+      }else{
+        await this.setState({valueUSDTResult: this.state.valueUSDTResult-(this.state.valueUSDTResult%50)+50});
+
+      }
+      
+    }
+    
+    this.setState({valueUSDT: parseInt(this.state.valueUSDTResult/50)});
   }
 
   async componentDidMount() {
@@ -380,9 +408,21 @@ export default class CrowdFunding extends Component {
           <h4>Plan Staking</h4>
           <div className="card wow bounceInUp text-center col-auto" >
             <div className="card-body">
-              <h2><b>{"50 USDT X "+this.state.valueUSDT+" = "+(this.state.valueUSDT*50)+" USDT"} </b></h2>
-              <div className="input-group sm-3 text-center">
-                <input type={"number"} value={this.state.valueUSDT} step="1" onChange={this.handleChangeUSDT} className="form-control mb-20 text-center h-auto w-auto" />
+            <div className="input-group sm-2 text-center d-flex justify-content-center">
+              <h3>
+                <b>
+                  {"50 USDT X "}
+                  <input type={"number"} min="1" value={this.state.valueUSDT} step="1" onChange={this.handleChangeUSDT} className="form-control mb-20 text-center h-auto w-auto" />
+                  {" = "}
+                  <input type={"number"} value={this.state.valueUSDTResult} step="50" onChange={this.handleChangeUSDTResult} className="form-control mb-20 text-center h-auto w-auto" />
+
+                  {" USDT"} 
+
+                  
+                </b>
+              </h3>
+              
+                
               </div>
             </div>
           </div>

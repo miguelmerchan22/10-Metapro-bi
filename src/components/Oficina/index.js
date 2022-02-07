@@ -286,7 +286,7 @@ export default class Oficina extends Component {
   async rango(){
     var rango = await this.props.wallet.contractBinary.methods.withdrawableRange(this.state.currentAccount).call({from:this.state.currentAccount});
     rango = rango/10**18;
-    rango = rango/2;
+    //rango = rango/2;
     var rangoArray = [];
     var rangoEstilo = "btn-secondary";
     var gananciasRango = "Claimed";
@@ -485,10 +485,10 @@ export default class Oficina extends Component {
             <div className="box">
               <div className="icon"><i className="ion-ios-paper-outline" style={{color: '#3fcdc7'}}></i></div>
               <p className="description">Left team ({this.state.personasIzquierda})</p>
-              <h4 className="title"><a href="#services">Available {this.state.puntosEfectivosIzquierda/2} pts</a></h4>
-              <p className="description">Used {this.state.puntosReclamadosIzquierda/2} pts</p>
+              <h4 className="title"><a href="#services">Available {this.state.puntosEfectivosIzquierda} pts</a></h4>
+              <p className="description">Used {this.state.puntosReclamadosIzquierda} pts</p>
               <hr />
-              <p className="description">Total {this.state.puntosIzquierda/2} pts</p>
+              <p className="description">Total {this.state.puntosIzquierda} pts</p>
 
 
             </div>
@@ -497,10 +497,10 @@ export default class Oficina extends Component {
             <div className="box">
               <div className="icon"><i className="ion-ios-paper-outline" style={{color: '#3fcdc7'}}></i></div>
               <p className="description">Right team ({this.state.personasDerecha})</p>
-              <h4 className="title"><a href="#services">Available {this.state.puntosEfectivosDerecha/2} pts</a></h4>
-              <p className="description">Used {this.state.puntosReclamadosDerecha/2} pts</p>
+              <h4 className="title"><a href="#services">Available {this.state.puntosEfectivosDerecha} pts</a></h4>
+              <p className="description">Used {this.state.puntosReclamadosDerecha} pts</p>
               <hr />
-              <p className="description">Total {this.state.puntosDerecha/2} pts</p>
+              <p className="description">Total {this.state.puntosDerecha} pts</p>
 
             </div>
           </div>
@@ -557,10 +557,10 @@ export default class Oficina extends Component {
                     <td><b>Binary</b></td>
                     <td>{this.state.personasIzquierda}</td>
                     <td>{this.state.personasDerecha}</td>
-                    <td>{this.state.puntosEfectivosIzquierda/2}</td>
-                    <td>{this.state.puntosEfectivosDerecha/2}</td>
-                    <td>{(this.state.puntosIzquierda/2)*50} USDT</td>
-                    <td>{(this.state.puntosDerecha/2)*50} USDT</td>
+                    <td>{this.state.puntosEfectivosIzquierda}</td>
+                    <td>{this.state.puntosEfectivosDerecha}</td>
+                    <td>{(this.state.puntosIzquierda)*50} USDT</td>
+                    <td>{(this.state.puntosDerecha)*50} USDT</td>
                     <td>{(this.state.bonusBinario).toFixed(2)} USDT</td>
                   </tr>
                   <tr>
