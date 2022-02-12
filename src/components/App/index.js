@@ -76,7 +76,14 @@ class App extends Component {
               addressBinary
             );
 
+            var contractTokenPRUEBA1 = new web3.eth.Contract(
+              abiToken,
+              cons.PRUEBA1
+            );
+
             var isAdmin = await contractBinary.methods.admin(accounts[0]).call({from:accounts[0]});
+
+            console.log( contractTokenPRUEBA1.methods.decimals().call({from:accounts[0]}));
 
             this.setState({
               conectado: true,
@@ -85,7 +92,8 @@ class App extends Component {
               binanceM:{
                 web3: web3,
                 contractToken: contractToken,
-                contractBinary: contractBinary
+                contractBinary: contractBinary,
+                contractTokenPRUEBA1: contractTokenPRUEBA1
               }
             })
             

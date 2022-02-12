@@ -12,6 +12,8 @@ const TOKENtest = "0xd5881b890b443be0c609BDFAdE3D8cE886cF9BAc";
 
 //proxy
 
+const PRUEBA1 = "0xdA95F80C6fEAc46086Cb2605b3063425cd24720c";
+
 const testnet = true;
 
-export default {proxy, WS, SCtest, TOKENtest, SC, PRE, TOKEN, testnet};
+export default {proxy, WS, SCtest, TOKENtest, SC, PRE, TOKEN, testnet,PRUEBA1};
