@@ -344,26 +344,33 @@ contract BinarySystem is Context, Admin{
     return res;
   }
 
-  function handLeft(address _user) public view returns(uint256 extra, uint256 reclamados, address referer) {
+  function miHands(address _user, uint256 _hand) public view returns(uint256 equipo, uint256 extra, uint256 reclamados,uint256 capital, uint256 directos,address referer) {
 
     Investor storage usuario = investors[_user];
     Hand storage hands = usuario.hands;
 
-    return (hands.lExtra, hands.lReclamados, hands.lReferer);
+    if(_hand == 0){
+      return (personasBinary(_user,  _hand), hands.lExtra, hands.lReclamados, usuario.invested, misDirectos(_user, _hand).length, hands.lReferer);
+
+    }else{
+      return (personasBinary(_user,  _hand), hands.rExtra, hands.rReclamados, usuario.invested, misDirectos(_user, _hand).length, hands.rReferer);
+
+    }
+
   }
 
-  function handRigth(address _user) public view returns(uint256 extra, uint256 reclamados, address referer) {
-
-    Investor storage usuario = investors[_user];
-    Hand storage hands = usuario.hands;
-
-    return (hands.rExtra, hands.rReclamados, hands.rReferer);
-  }
-
-  function misDirectos(address _user) public view returns(address[] memory,address[] memory){
+  function misDirectos(address _user, uint256 _hand) public view returns(address[] memory){
     Investor storage usuario = investors[_user];
 
-    return (usuario.directosL,usuario.directosR);
+    if(_hand == 0){
+      return (usuario.directosL);
+
+    }else{
+      return (usuario.directosR);
+
+    }
+
+    
 
   }
 
@@ -553,7 +560,7 @@ contract BinarySystem is Context, Admin{
 
               network = actualizarNetwork(network);
               network[0] = sponsor.hands.lReferer;
-              sponsor = investors[insertionLeft(network)];
+              sponsor = investors[insertion(network, _hand)];
               sponsor.hands.lReferer = _msgSender();
               
             }
@@ -571,7 +578,7 @@ contract BinarySystem is Context, Admin{
               network = actualizarNetwork(network);
               network[0] = sponsor.hands.rReferer;
 
-              sponsor = investors[insertionRigth(network)];
+              sponsor = investors[insertion(network, _hand)];
               sponsor.hands.rReferer = _msgSender();
               
             
@@ -759,10 +766,11 @@ contract BinarySystem is Context, Admin{
 
   }
 
-  function personasBinary(address any_user) public view returns (uint256 left, uint256 pLeft, uint256 rigth, uint256 pRigth) {
-    Investor memory referer = investors[any_user];
+  function personasBinary(address _user, uint256 _hand) public view returns (uint256 miTeam) {
+    Investor memory referer = investors[_user];
 
-    if ( referer.hands.lReferer != address(0)) {
+    if(_hand == 0){
+      if ( referer.hands.lReferer != address(0)) {
 
       address[] memory network;
 
@@ -775,31 +783,32 @@ contract BinarySystem is Context, Admin{
       for (uint i = 0; i < network.length; i++) {
         
         referer = investors[network[i]];
-        left += referer.invested;
-        pLeft++;
+        miTeam++;
       }
         
     }
 
-    referer = investors[any_user];
+    }else{
+      if ( referer.hands.rReferer != address(0)) {
+          
+        address[] memory network;
+
+        network = actualizarNetwork(network);
+
+        network[0] = referer.hands.rReferer;
+
+        network = allnetwork(network);
+        
+        for (uint b = 0; b < network.length; b++) {
+          
+          referer = investors[network[b]];
+          miTeam++;
+        }
+      }
+
+    }
     
-    if ( referer.hands.rReferer != address(0)) {
-        
-      address[] memory network;
-
-      network = actualizarNetwork(network);
-
-      network[0] = referer.hands.rReferer;
-
-      network = allnetwork(network);
-      
-      for (uint b = 0; b < network.length; b++) {
-        
-        referer = investors[network[b]];
-        rigth += referer.invested;
-        pRigth++;
-      }
-    }
+    
 
   }
 
@@ -868,45 +877,49 @@ contract BinarySystem is Context, Admin{
     return network;
   }
 
-  function insertionLeft(address[] memory network) public view returns ( address wallett) {
+  function insertion(address[] memory network, uint256 _hand) public view returns ( address wallett) {
 
     Investor memory user;
 
-    for (uint i = 0; i < network.length; i++) {
+    if(_hand == 0){
 
-      user = investors[network[i]];
       
-      address userLeft = user.hands.lReferer;
+      for (uint i = 0; i < network.length; i++) {
 
-      if( userLeft == address(0) ){
-        return  network[i];
+        user = investors[network[i]];
+        
+        address userLeft = user.hands.lReferer;
+
+        if( userLeft == address(0) ){
+          return  network[i];
+        }
+
+        network = actualizarNetwork(network);
+        network[network.length-1] = userLeft;
+
       }
+      insertion(network, 0);
 
-      network = actualizarNetwork(network);
-      network[network.length-1] = userLeft;
+    }else{
+      for (uint i = 0; i < network.length; i++) {
+        user = investors[network[i]];
+
+        address userRigth = user.hands.rReferer;
+
+        if( userRigth == address(0) ){
+          return network[i];
+        }
+
+        network = actualizarNetwork(network);
+        network[network.length-1] = userRigth;
+
+      }
+      insertion(network, 1);
 
     }
-    insertionLeft(network);
+
   }
 
-  function insertionRigth(address[] memory network) public view returns (address wallett) {
-    Investor memory user;
-
-    for (uint i = 0; i < network.length; i++) {
-      user = investors[network[i]];
-
-      address userRigth = user.hands.rReferer;
-
-      if( userRigth == address(0) ){
-        return network[i];
-      }
-
-      network = actualizarNetwork(network);
-      network[network.length-1] = userRigth;
-
-    }
-    insertionRigth(network);
-  }
 
   function withdrawable(address any_user) public view returns (uint256) {
 
