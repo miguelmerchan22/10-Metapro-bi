@@ -536,7 +536,7 @@ export default class Oficina extends Component {
         </div>
 
         <div className="row text-center">
-          <div className="col-md-6 col-lg-10 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1s">
+          <div className="col-md-12 col-lg-10 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1s">
             <div className="box">
               <table border="1px" width="100%">
 

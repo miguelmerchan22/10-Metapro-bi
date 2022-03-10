@@ -46,18 +46,14 @@ library SafeMath {
 
 }
 
-contract Context {
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
 
-  constructor () { }
-
-  function _msgSender() internal view returns (address payable) {
-    return payable(msg.sender);
-  }
-
-  function _msgData() internal view returns (bytes memory) {
-    this; 
-    return msg.data;
-  }
+    function _msgData() internal view virtual returns (bytes calldata) {
+        return msg.data;
+    }
 }
 
 contract Ownable is Context {
@@ -138,7 +134,8 @@ contract BinarySystem is Context, Admin{
     uint256 paidAt;
     uint256 amount;
     uint256 withdrawn;
-    uint256 directos;
+    address[] directosL;
+    address[] directosR;
     Deposito[] depositos;
     Hand hands;
   }
@@ -165,6 +162,9 @@ contract BinarySystem is Context, Admin{
   uint256 public unidades = 86400;
 
   uint256 public porcent = 200;
+
+  uint256 public multiPuntos = 1; //multiplicar puntos
+  uint256 public factorPuntos = 2; // dividir puntos
 
   uint256 public porcentPuntosBinario = 5;
 
@@ -360,6 +360,13 @@ contract BinarySystem is Context, Admin{
     return (hands.rExtra, hands.rReclamados, hands.rReferer);
   }
 
+  function misDirectos(address _user) public view returns(address[] memory,address[] memory){
+    Investor storage usuario = investors[_user];
+
+    return (usuario.directosL,usuario.directosR);
+
+  }
+
   function depositos(address _user) public view returns(uint256[] memory, uint256[] memory, bool[] memory, bool[] memory, uint256 ){
     Investor storage usuario = investors[_user];
 
@@ -531,8 +538,10 @@ contract BinarySystem is Context, Admin{
 
         if (_sponsor != address(0) ){
           Investor storage sponsor = investors[_sponsor];
-          sponsor.directos++;
+          
           if ( _hand == 0 ) {
+
+            sponsor.directosL.push(_msgSender());
               
             if (sponsor.hands.lReferer == address(0) ) {
 
@@ -549,6 +558,8 @@ contract BinarySystem is Context, Admin{
               
             }
           }else{
+
+            sponsor.directosR.push(_sponsor);
 
             if ( sponsor.hands.rReferer == address(0) ) {
 
@@ -656,7 +667,7 @@ contract BinarySystem is Context, Admin{
       for (uint i = 0; i < network.length; i++) {
       
         user = investors[network[i]];
-        left += user.invested;
+        left += user.invested.div(factorPuntos);
       }
         
     }
@@ -678,7 +689,7 @@ contract BinarySystem is Context, Admin{
         for (uint i = 0; i < network.length; i++) {
         
           user = investors[network[i]];
-          rigth += user.invested;
+          rigth += user.invested.mul(multiPuntos).div(factorPuntos);
         }
         
     }
@@ -690,7 +701,7 @@ contract BinarySystem is Context, Admin{
 
     if (left < rigth) {
       if (left.mul(porcentPuntosBinario).div(100) <= user.amount ) {
-        amount = left.mul(porcentPuntosBinario).div(100) ;
+        amount = left.mul(porcentPuntosBinario).mul(multiPuntos).div(100) ;
           
       }else{
         amount = user.amount;
